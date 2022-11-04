@@ -1,7 +1,7 @@
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import mysql from './connection';
 
-import { IFindProduct } from '../interfaces';
+import { IFindProduct, IProduct } from '../interfaces';
 
 // Classes
 export default class ProductModel {
@@ -31,5 +31,12 @@ export default class ProductModel {
     const { name, amount } = rows;
 
     return { name, amount };
+  }
+
+  async getAll(): Promise<IProduct[]> {
+    const sql = 'SELECT * FROM Trybesmith.Products';
+
+    const [result] = await this.connection.execute<IProduct[] & RowDataPacket[]>(sql);
+    return result;
   }
 }

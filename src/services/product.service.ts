@@ -25,4 +25,9 @@ export default class LoginService {
 
     return result;
   }
+
+  async getAll() {
+    const result = await this.productModel.getAll();
+    return result;
+  }
 }
