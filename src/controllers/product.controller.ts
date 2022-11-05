@@ -1,11 +1,15 @@
 import { Request, Response } from 'express';
+import { validateAmount, validateName } from '../middlewares/validates';
 import ProductService from '../services/product.service';
 
 export default class ProductController {
   productService = new ProductService();
 
   async createProduct(req: Request, res: Response) {
-    const product = await this.productService.createProduct(req.body);
+    const { name, amount } = req.body;
+    validateName(name);
+    validateAmount(amount);
+    const product = await this.productService.createProduct(name, amount);
     
     res.status(201).json(product);
   }
