@@ -2,7 +2,7 @@ import { IProduct } from '../interfaces';
 import ProductModel from '../models/product.model';
 import HttpException from '../shared/http.exception';
 
-export default class LoginService {
+export default class ProductService {
   productModel = new ProductModel();
 
   async createProduct(product: IProduct) {

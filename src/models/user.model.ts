@@ -3,7 +3,6 @@ import mysql from './connection';
 
 import { IUser } from '../interfaces';
 
-// Classes
 export default class UserModel {
   connection = mysql;
 

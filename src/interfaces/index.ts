@@ -17,3 +17,14 @@ export interface IUser {
   level: number,
   password: string,
 }
+
+export interface IOrder {
+  id: number,
+  userId: number,
+  productsIds: number[],
+}
+
+export interface ILogin {
+  email: string,
+  password: string,
+}

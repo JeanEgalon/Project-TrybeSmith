@@ -16,15 +16,15 @@ export default class UserService {
     return result;
   }
 
-  async createToken(user: IUser) {
-    const { id, username, classe, level } = user;
+  async createToken(username: string) {  
     const findUser = await this.userModel.findByUserName(username);
+    const { id, classe, level } = findUser;
 
     if (!findUser) {
       throw new HttpException(401, 'Usuário não encontrado');
     }
 
-    // se existir criar o token
+    // se existir cria o token
     const token = jwt.sign({
       id, username, classe, level,
     }, process.env.JWT_SECRET as string);
