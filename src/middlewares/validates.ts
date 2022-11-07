@@ -83,3 +83,17 @@ export const validatePassword = (password: string) => {
     throw new HttpException(422, '"password" length must be at least 8 characters long');
   }
 };
+
+export const validateProductsId = (productsIds: number[]) => {
+  if (!productsIds) {
+    throw new HttpException(400, '"productsIds" is required');
+  }
+
+  if (!Array.isArray(productsIds)) {
+    throw new HttpException(422, '"productsIds" must be an array');
+  }
+
+  if (productsIds.length < 1) {
+    throw new HttpException(422, '"productsIds" must include only numbers');
+  }
+};

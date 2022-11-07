@@ -1,4 +1,4 @@
-import { RowDataPacket } from 'mysql2';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import mysql from './connection';
 
 import { IOrder } from '../interfaces';
@@ -12,6 +12,20 @@ export default class OrderModel {
                  ON p.orderId = o.id GROUP BY o.id;`;
     
     const [row] = await this.connection.execute<IOrder[] & RowDataPacket[]>(sql);
+    
+    return row;
+  }
+
+  async createOrder(id: number): Promise<number> {
+    const sql = 'INSERT INTO Trybesmith.Orders (userId) VALUES(?)';
+
+    const [{ insertId }] = await this.connection.execute<ResultSetHeader>(sql, [id]);
+    return insertId;
+  }
+
+  async updateProducts(orderId: number, id: number): Promise<RowDataPacket[]> {
+    const sql = 'UPDATE Trybesmith.Products SET orderId = ? WHERE id = ?';
+    const [row] = await this.connection.execute<RowDataPacket[]>(sql, [orderId, id]);
     
     return row;
   }

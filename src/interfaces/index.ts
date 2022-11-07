@@ -28,3 +28,11 @@ export interface ILogin {
   email: string,
   password: string,
 }
+
+export interface IToken {
+  message: string,
+}
+
+export interface IChanged {
+  changedRows: number,
+}
